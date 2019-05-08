@@ -9,6 +9,11 @@ var nav = document.getElementById('nav');
 btn.addEventListener('click', function() {
     btn.classList.toggle('open');
     menu.classList.toggle('open');
+    menu_items.forEach(el => {
+        el.addEventListener('click', function() {
+            menu.classList.remove('open');
+        })
+    });
 });
 
 /*menu background*/
