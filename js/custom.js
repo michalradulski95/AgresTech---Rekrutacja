@@ -29,7 +29,7 @@ window.onscroll = function load() {
     } else {
         nav.style.backgroundColor = '';
         menu_items.forEach(el => {
-            el.style.color = '#ffffff';
+            el.style.color = '';
             el.style.borderBottom = '1px solid #ffffff';
         })
     }
