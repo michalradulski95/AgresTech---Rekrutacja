@@ -11,6 +11,7 @@ btn.addEventListener('click', function() {
     menu.classList.toggle('open');
     menu_items.forEach(el => {
         el.addEventListener('click', function() {
+            btn.classList.remove('open');
             menu.classList.remove('open');
         })
     });
