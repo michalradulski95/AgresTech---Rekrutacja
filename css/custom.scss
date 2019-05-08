@@ -1,0 +1,618 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter|Montserrat|Muli|Playfair+Display');
+$colors: ( white: #ffffff,
+grey: rgb(64, 64, 64));
+@function color-set ($color-name) {
+    @return map-get($colors,
+    $color-name)
+}
+
+;
+$font-family: ( header: 'Montserrat',
+content: 'Muli');
+@function family-set ($font-family-name) {
+    @return map-get($font-family,
+    $font-family-name)
+}
+
+;
+$font-size: ( small: 14px,
+medium: 22px,
+large: 40px,
+extra-large: 55px);
+@function size-set ($font-size-name) {
+    @return map-get($font-size,
+    $font-size-name)
+}
+
+;
+$laptop: 1024px;
+@mixin laptop {
+    @media (max-width:#{$laptop}) {
+        @content
+    }
+}
+
+$tablet: 768px;
+@mixin tablet {
+    @media (max-width:#{$tablet}) {
+        @content
+    }
+}
+
+$phone: 425px;
+@mixin phone {
+    @media (max-width:#{$phone}) {
+        @content
+    }
+}
+
+$sphone: 320px;
+@mixin sphone {
+    @media (max-width:#{$sphone}) {
+        @content
+    }
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-family: 'Bitter';
+    font-size: size-set(extra-large);
+    font-weight: 400;
+    margin: 10px 0;
+    color: color-set(white);
+    line-height: 90%;
+}
+
+h2 {
+    font-family: family-set(header);
+    font-size: size-set(large);
+    font-weight: 700;
+    color: color-set(white);
+}
+
+h3 {
+    font-family: family-set(header);
+    font-size: size-set(medium);
+    font-weight: 700;
+}
+
+h4 {
+    font-family: 'Playfair Display';
+    font-size: size-set(medium);
+    font-weight: 400;
+    color: color-set(white);
+    margin: 10px 0 0;
+}
+
+p {
+    font-family: family-set(content);
+    font-weight: 400;
+    font-size: size-set(small);
+    margin: 0 10px;
+}
+
+a {
+    font-family: family-set(header);
+    font-size: size-set(small);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    @include phone {
+        margin: 0;
+    }
+    .logo {
+        width: 80px;
+        height: 80px;
+        @include phone {
+            position: absolute;
+            right: 0;
+        }
+        @include sphone {
+            z-index: -1;
+        }
+    }
+    .menu-items {
+        height: 30px;
+        margin: 10px 0;
+        padding: 20px;
+        margin-left: 80px;
+        @include phone {
+            visibility: hidden;
+            opacity: 0;
+            z-index: -1;
+            padding: 0;
+        }
+        a {
+            margin: 0 10px;
+            color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+            z-index: 1;
+            @include phone {
+                margin: 15px 10px;
+                color: rgb(0, 0, 0);
+                border-bottom: 1px solid #000000;
+            }
+        }
+        &.open {
+            width: 100%;
+            height: 400px;
+            visibility: visible;
+            opacity: 1;
+            transition: 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #ffffff;
+            margin: 0;
+        }
+        &.scroll {
+            height: 50px;
+            background: #585858;
+            padding-top: 30px;
+        }
+    }
+    .hamburger-menu {
+        width: 20px;
+        height: 20px;
+        border: 0;
+        position: absolute;
+        display: none;
+        left: 5%;
+        margin-top: 20px;
+        cursor: pointer;
+        @include phone {
+            display: inline-block;
+            .first-line,
+            .third-line {
+                background-color: #000000;
+                width: 20px;
+                height: 3px;
+                margin: 3px 1px;
+                transition: all 0.2s ease-out;
+            }
+            .second-line {
+                background-color: #000000;
+                width: 20px;
+                height: 3px;
+                margin: 4px 1px;
+                transition: 0.2s ease;
+            }
+        }
+        &.open {
+            .first-line {
+                transform: translateY(7px) rotate(45deg);
+            }
+            .second-line {
+                opacity: 0;
+            }
+            .third-line {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+        }
+    }
+}
+
+header {
+    background-image: url(../images/header.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 980px;
+    z-index: -1;
+    .heading {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        @include phone {
+            left: 0;
+            margin: 0 20px;
+        }
+        p {
+            color: color-set(white);
+        }
+        button {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background: color-set(white);
+            outline: none;
+            cursor: pointer;
+            margin: 20px 0;
+            a {
+                color: color-set(grey);
+                &::after {
+                    content: '\2192';
+                    margin: 0 0 0 10px;
+                }
+            }
+        }
+    }
+    .wrapper {
+        display: flex;
+        height: 100%;
+        .login {
+            background: rgba(32, 32, 32, 0.6);
+            border: 1px solid #000000;
+            width: 400px;
+            height: 450px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            h3 {
+                color: #ffffff;
+            }
+            label {
+                color: #ffffff;
+                font-family: family-set(content);
+            }
+            input {
+                width: 250px;
+                height: 30px;
+                border: none;
+                margin: 10px 0;
+                &::placeholder {
+                    position: relative;
+                    left: 10%;
+                }
+            }
+            button {
+                margin: 20px 0;
+                height: 30px;
+                width: 250px;
+                border: none;
+                border-radius: 10px;
+                outline: none;
+                cursor: pointer;
+                &:hover {
+                    background: #ec8569;
+                }
+            }
+        }
+    }
+}
+
+.description {
+    visibility: hidden;
+    opacity: 0;
+    width: 1140px;
+    margin: -100px auto -40px;
+    z-index: 1;
+    box-shadow: 1px 10px 74px -13px rgba(0, 0, 0, 0.75);
+    &.slide {
+        display: flex;
+        position: relative;
+        left: 0;
+        margin: -100px auto -40px;
+        opacity: 1;
+        visibility: visible;
+        transition: 1s ease;
+    }
+    @include laptop {
+        max-width: 1024px;
+        left: 1550px;
+        margin: auto;
+    }
+    @include tablet {
+        max-width: 768px;
+        flex-direction: column;
+        box-shadow: none;
+    }
+    @include phone {
+        max-width: 320px;
+        margin: -100px auto 0;
+    }
+    .left {
+        background-image: url(../images/thinking.png);
+        background-size: 360px 500px;
+        background-repeat: no-repeat;
+        width: 360px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        color: color-set(white);
+        @include tablet {
+            margin: 0 auto;
+        }
+        @include phone {
+            max-width: 320px;
+            margin: 0 auto;
+        }
+    }
+    .right {
+        display: flex;
+        background: color-set(white);
+        width: 780px;
+        align-items: center;
+        @include tablet {
+            max-width: 768px;
+        }
+        @include phone {
+            max-width: 320px;
+        }
+        .column-img {
+            margin: 20px;
+            img {
+                margin: 40px 0;
+            }
+            @include phone {
+                margin: 20px 3px;
+            }
+        }
+        .column-text {
+            margin: 0 20px;
+            p {
+                margin: 0;
+            }
+            @include phone {
+                margin: 20px 3px;
+            }
+        }
+    }
+}
+
+.about {
+    width: 100%;
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../images/background.png);
+    z-index: -1;
+    h2 {
+        margin: 20px 0;
+        @include phone {
+            margin: 20px;
+        }
+    }
+    p {
+        color: color-set(white);
+        margin: 0;
+        @include laptop {
+            margin: 0 20px;
+        }
+    }
+    button {
+        width: 150px;
+        height: 40px;
+        border: none;
+        border-radius: 20px;
+        background: color-set(white);
+        outline: none;
+        cursor: pointer;
+        margin: 20px 10px;
+        a {
+            color: color-set(grey);
+        }
+    }
+}
+
+.services {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+    color: color-set(grey);
+    @include phone {
+        height: 1000px;
+    }
+    h3 {
+        margin: 20px 0;
+        font-size: size-set(large);
+        @include phone {
+            margin: 20px;
+        }
+    }
+    p {
+        margin: 20px 0;
+        @include phone {
+            margin: 20px;
+        }
+    }
+    .wrapper {
+        @include tablet {
+            width: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        @include phone {
+            max-width: 400px;
+        }
+    }
+    .item {
+        display: flex;
+        flex-direction: row;
+        width: 21.250em;
+        h4 {
+            color: color-set(grey);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .item-img {
+            @include phone {
+                width: 160px;
+            }
+            img {
+                margin: 30px 10px;
+            }
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .upside {
+        display: flex;
+        flex-direction: row;
+        margin: 20px 0;
+        @include phone {
+            flex-direction: column;
+            margin: 20px 40px;
+        }
+    }
+    .downside {
+        display: flex;
+        flex-direction: row;
+        margin: 20px 0;
+        @include phone {
+            flex-direction: column;
+            margin: 20px 40px;
+        }
+    }
+}
+
+footer {
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background: rgb(49, 49, 49);
+    color: rgb(219, 212, 212);
+    @include phone {
+        height: 600px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .left {
+        display: flex;
+        flex-direction: column;
+        a {
+            color: rgb(126, 126, 126);
+            font-family: family-set(content);
+            font-weight: 400;
+            margin: 5px 0;
+        }
+        @include tablet {
+            margin: 0 10px;
+        }
+        @include phone {
+            width: 100%;
+            margin: 0 20px;
+        }
+    }
+    .center {
+        width: 21.875em;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        h3 {
+            margin: 20px 0;
+        }
+        p,
+        span {
+            color: rgb(126, 126, 126);
+            margin: 0 0 10px 0;
+        }
+        .mail {
+            width: 250px;
+            height: 35px;
+            border: none;
+            margin-bottom: 10px;
+            &::placeholder {
+                position: relative;
+                left: 10%;
+            }
+        }
+        .container {
+            display: block;
+            cursor: pointer;
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+            .checkmark {
+                position: absolute;
+                height: 30px;
+                width: 30px;
+                right: 17%;
+                bottom: 33%;
+                background-color: #eee;
+                &:hover {
+                    background-color: #ec8569;
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                    left: 11px;
+                    top: 7px;
+                    width: 5px;
+                    height: 10px;
+                    border: solid white;
+                    border-width: 0 3px 3px 0;
+                    transform: rotate(45deg);
+                }
+                @include tablet {
+                    right: 12%;
+                }
+                @include phone {
+                    right: 25%;
+                }
+            }
+            input:checked~.checkmark {
+                background-color: #ec8569;
+            }
+            input:checked~.checkmark:after {
+                display: block;
+            }
+        }
+        @include tablet {
+            margin: 0 10px;
+        }
+        @include phone {
+            width: 100%;
+            margin: 0 20px;
+        }
+    }
+    .right {
+        width: 15.625em;
+        p {
+            margin: 0;
+            color: rgb(126, 126, 126);
+        }
+        @include tablet {
+            margin: 0 10px;
+        }
+        @include phone {
+            width: 100%;
+            margin: 0 20px;
+        }
+    }
+}
