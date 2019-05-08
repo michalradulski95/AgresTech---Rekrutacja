@@ -20,7 +20,7 @@ btn.addEventListener('click', function() {
 /*menu background*/
 
 window.onscroll = function load() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100 || window.innerWidth < 450) {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         nav.style.backgroundColor = '#ffffff';
         menu_items.forEach(el => {
             el.style.color = '#000000';
@@ -37,6 +37,5 @@ window.onscroll = function load() {
     /*section slide effect*/
     if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350 || window.innerWidth > 1440) {
         description.classList.add('slide');
-
     }
 };
