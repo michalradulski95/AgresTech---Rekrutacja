@@ -1,4 +1,4 @@
-# AgresTech---Rekrutacja
+# Finance
 
 Made a project of landing page and login page followed by 3 logos.
 
